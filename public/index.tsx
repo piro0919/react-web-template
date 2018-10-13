@@ -6,9 +6,7 @@ import App from './App';
 ReactDOM.render(
   <BrowserRouter
     basename={
-      process.env.NODE_ENV === 'development'
-        ? ''
-        : '/react-router-dom-transition'
+      process.env.NODE_ENV === 'development' ? '' : '/react-web-template'
     }
   >
     <Route component={App} path="/" />
