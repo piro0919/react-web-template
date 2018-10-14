@@ -28,6 +28,11 @@ const Div = styled.div`
       flex-direction: column;
       width: 100%;
 
+      /* IEのみ必要？ */
+      @media all and (-ms-high-contrast: none) {
+        height: 100%;
+      }
+
       > .wrapper {
         display: flex;
         flex-direction: column;
