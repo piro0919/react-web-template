@@ -35,7 +35,9 @@ const StyledReactWebTemplate = styled(ReactWebTemplate)`
   .left-nav,
   .right-nav {
     background-color: lightgray;
+    box-sizing: border-box;
     height: 100%;
+    padding: 10px;
     width: 100px;
   }
 

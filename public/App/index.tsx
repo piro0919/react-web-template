@@ -69,6 +69,9 @@ class App extends React.Component<any, any> {
             <li>leftNavClassName</li>
             <li>rightNavClassName</li>
             <li>
+              scrollWrapperClassName (add to wrapper DOM has vertical scroll)
+            </li>
+            <li>
               wrapperClassName (add to wrapper DOM of header and main DOM)
             </li>
           </ul>

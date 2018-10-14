@@ -16,6 +16,7 @@ export interface ReactWebTemplateProps {
   mainClassName?: string;
   rightNav?: React.ReactNode;
   rightNavClassName?: string;
+  scrollWrapperClassName?: string;
   wrapperClassName?: string;
 }
 
@@ -32,6 +33,7 @@ export const reactWebTemplateDefaultProps = {
   mainClassName: '',
   rightNav: null,
   rightNavClassName: '',
+  scrollWrapperClassName: '',
   wrapperClassName: ''
 };
 
@@ -84,6 +86,7 @@ class ReactWebTemplate extends React.Component<
       mainClassName,
       rightNav,
       rightNavClassName,
+      scrollWrapperClassName,
       wrapperClassName
     } = this.props;
     const { windowHeight } = this.state;
@@ -99,14 +102,19 @@ class ReactWebTemplate extends React.Component<
         {rightNav && (
           <nav className={`nav-right ${rightNavClassName}`}>{rightNav}</nav>
         )}
-        <div className={`content ${contentClassName}`}>
-          <div className={`wrapper ${wrapperClassName}`}>
-            {header && <header className={headerClassName}>{header}</header>}
-            <main className={mainClassName} role="main">
-              {children}
-            </main>
+        <div className={`scroll-wrapper ${scrollWrapperClassName}`}>
+          <div
+            className={`content ${contentClassName}`}
+            style={{ minHeight: `${windowHeight}px` }}
+          >
+            <div className={`wrapper ${wrapperClassName}`}>
+              {header && <header className={headerClassName}>{header}</header>}
+              <main className={mainClassName} role="main">
+                {children}
+              </main>
+            </div>
+            {footer && <footer className={footerClassName}>{footer}</footer>}
           </div>
-          {footer && <footer className={footerClassName}>{footer}</footer>}
         </div>
       </Div>
     );

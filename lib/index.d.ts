@@ -13,6 +13,7 @@ export interface ReactWebTemplateProps {
     mainClassName?: string;
     rightNav?: React.ReactNode;
     rightNavClassName?: string;
+    scrollWrapperClassName?: string;
     wrapperClassName?: string;
 }
 export declare const reactWebTemplateDefaultProps: {
@@ -28,6 +29,7 @@ export declare const reactWebTemplateDefaultProps: {
     mainClassName: string;
     rightNav: null;
     rightNavClassName: string;
+    scrollWrapperClassName: string;
     wrapperClassName: string;
 };
 interface ReactWebTemplateState {
@@ -47,6 +49,7 @@ declare class ReactWebTemplate extends React.Component<ReactWebTemplateProps, Re
         mainClassName: string;
         rightNav: null;
         rightNavClassName: string;
+        scrollWrapperClassName: string;
         wrapperClassName: string;
     };
     constructor(props: ReactWebTemplateProps);

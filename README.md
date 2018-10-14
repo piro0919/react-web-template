@@ -19,6 +19,7 @@ following class name.
 - headerClassName
 - leftNavClassName
 - rightNavClassName
+- scrollWrapperClassName (add to wrapper DOM has vertical scroll)
 - wrapperClassName (add to wrapper DOM of header and main DOM)
 
 ## example

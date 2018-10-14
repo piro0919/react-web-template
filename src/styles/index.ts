@@ -19,20 +19,23 @@ const Div = styled.div`
     left: 100%;
   }
 
-  > .content {
-    display: flex;
-    flex-direction: column;
+  > .scroll-wrapper {
     height: inherit;
     overflow-y: scroll;
-    width: 100%;
 
-    > .wrapper {
+    > .content {
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      width: 100%;
 
-      > main {
+      > .wrapper {
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
+
+        > main {
+          flex-grow: 1;
+        }
       }
     }
   }
