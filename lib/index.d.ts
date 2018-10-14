@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './styles/global';
 export interface ReactWebTemplateProps {
     children?: React.ReactNode;
     className?: string;
@@ -29,5 +30,29 @@ export declare const reactWebTemplateDefaultProps: {
     rightNavClassName: string;
     wrapperClassName: string;
 };
-declare const ReactWebTemplate: React.SFC<ReactWebTemplateProps>;
+interface ReactWebTemplateState {
+    windowHeight: number;
+}
+declare class ReactWebTemplate extends React.Component<ReactWebTemplateProps, ReactWebTemplateState> {
+    static defaultProps: {
+        children: null;
+        className: string;
+        contentClassName: string;
+        footer: null;
+        footerClassName: string;
+        header: null;
+        headerClassName: string;
+        leftNav: null;
+        leftNavClassName: string;
+        mainClassName: string;
+        rightNav: null;
+        rightNavClassName: string;
+        wrapperClassName: string;
+    };
+    constructor(props: ReactWebTemplateProps);
+    componentDidMount(): void;
+    componentWillUnmount(): void;
+    onResizeWindow(): void;
+    render(): JSX.Element;
+}
 export default ReactWebTemplate;

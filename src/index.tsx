@@ -1,6 +1,7 @@
+import debounce = require('lodash.debounce');
 import * as React from 'react';
-import { Helmet } from 'react-helmet';
 import Div from './styles';
+import './styles/global';
 
 export interface ReactWebTemplateProps {
   children?: React.ReactNode;
@@ -34,51 +35,82 @@ export const reactWebTemplateDefaultProps = {
   wrapperClassName: ''
 };
 
-const ReactWebTemplate: React.SFC<ReactWebTemplateProps> = ({
-  children,
-  className,
-  contentClassName,
-  footer,
-  footerClassName,
-  header,
-  headerClassName,
-  leftNav,
-  leftNavClassName,
-  mainClassName,
-  rightNav,
-  rightNavClassName,
-  wrapperClassName
-}: ReactWebTemplateProps) => (
-  <Div className={`react-web-template ${className}`}>
-    <Helmet>
-      <style type="text/css">
-        {`
-html {
-  overflow: hidden;
+interface ReactWebTemplateState {
+  windowHeight: number;
 }
 
-body {
-  margin: 0;
-}
-            `}
-      </style>
-    </Helmet>
-    {leftNav && <nav className={`nav-left ${leftNavClassName}`}>{leftNav}</nav>}
-    {rightNav && (
-      <nav className={`nav-right ${rightNavClassName}`}>{rightNav}</nav>
-    )}
-    <div className={`content ${contentClassName}`}>
-      <div className={`wrapper ${wrapperClassName}`}>
-        {header && <header className={headerClassName}>{header}</header>}
-        <main className={mainClassName} role="main">
-          {children}
-        </main>
-      </div>
-      {footer && <footer className={footerClassName}>{footer}</footer>}
-    </div>
-  </Div>
-);
+class ReactWebTemplate extends React.Component<
+  ReactWebTemplateProps,
+  ReactWebTemplateState
+> {
+  static defaultProps = reactWebTemplateDefaultProps;
 
-ReactWebTemplate.defaultProps = reactWebTemplateDefaultProps;
+  constructor(props: ReactWebTemplateProps) {
+    super(props);
+
+    const { innerHeight } = window;
+
+    this.onResizeWindow = this.onResizeWindow.bind(this);
+    this.state = { windowHeight: innerHeight };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', debounce(this.onResizeWindow, 100));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResizeWindow);
+  }
+
+  onResizeWindow() {
+    const { innerHeight } = window;
+
+    this.setState({
+      windowHeight: innerHeight
+    });
+  }
+
+  render() {
+    const {
+      children,
+      className,
+      contentClassName,
+      footer,
+      footerClassName,
+      header,
+      headerClassName,
+      leftNav,
+      leftNavClassName,
+      mainClassName,
+      rightNav,
+      rightNavClassName,
+      wrapperClassName
+    } = this.props;
+    const { windowHeight } = this.state;
+
+    return (
+      <Div
+        className={`react-web-template ${className}`}
+        style={{ height: `${windowHeight}px` }}
+      >
+        {leftNav && (
+          <nav className={`nav-left ${leftNavClassName}`}>{leftNav}</nav>
+        )}
+        {rightNav && (
+          <nav className={`nav-right ${rightNavClassName}`}>{rightNav}</nav>
+        )}
+        <div className={`content ${contentClassName}`}>
+          <div className={`wrapper ${wrapperClassName}`}>
+            {header && <header className={headerClassName}>{header}</header>}
+            <main className={mainClassName} role="main">
+              {children}
+            </main>
+          </div>
+          {footer && <footer className={footerClassName}>{footer}</footer>}
+        </div>
+      </Div>
+    );
+  }
+}
 
 export default ReactWebTemplate;

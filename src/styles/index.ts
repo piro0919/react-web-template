@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const Div = styled.div`
+  position: relative;
+
   > .nav-left,
   > .nav-right {
-    height: 100vh;
+    height: inherit;
     overflow-y: auto;
-    position: fixed;
+    position: absolute;
     top: 0;
   }
 
@@ -20,7 +22,7 @@ const Div = styled.div`
   > .content {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: inherit;
     overflow-y: scroll;
     width: 100%;
 

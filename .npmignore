@@ -4,3 +4,5 @@ public
 src
 tsconfig.json
 webpack.config.js
+webpack.prod.js
+node_modules
