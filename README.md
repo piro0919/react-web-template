@@ -25,3 +25,29 @@ following class name.
 ## example
 
 [GitHub Pages](https://piro0919.github.io/react-web-template/)
+
+## browser
+
+### Windows
+
+| IE11 | Edge | Chrome | FireFox |
+| :---: | :---: | :---: | :---: |
+| OK | ? | OK | OK |
+
+### Mac
+
+| Safari | Chrome | FireFox |
+| :---: | :---: | :---: |
+| ? | ? | ? |
+
+### Android
+
+| Chrome |
+| :---: |
+| OK |
+
+### iOS
+
+| Chrome | Safari |
+| :---: | :---: |
+| OK | OK |
