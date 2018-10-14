@@ -19,28 +19,17 @@ const Div = styled.div`
     left: 100%;
   }
 
-  > .scroll-wrapper {
+  > .content {
     height: inherit;
     overflow-y: scroll;
+    width: 100%;
 
-    > .content {
+    > .wrapper {
       display: flex;
       flex-direction: column;
-      width: 100%;
 
-      /* IEのみ必要？ */
-      @media all and (-ms-high-contrast: none) {
-        height: 100%;
-      }
-
-      > .wrapper {
-        display: flex;
-        flex-direction: column;
+      > main {
         flex-grow: 1;
-
-        > main {
-          flex-grow: 1;
-        }
       }
     }
   }

@@ -16,7 +16,6 @@ export interface ReactWebTemplateProps {
   mainClassName?: string;
   rightNav?: React.ReactNode;
   rightNavClassName?: string;
-  scrollWrapperClassName?: string;
   wrapperClassName?: string;
 }
 
@@ -33,11 +32,11 @@ export const reactWebTemplateDefaultProps = {
   mainClassName: '',
   rightNav: null,
   rightNavClassName: '',
-  scrollWrapperClassName: '',
   wrapperClassName: ''
 };
 
 interface ReactWebTemplateState {
+  footerHeight: number;
   windowHeight: number;
 }
 
@@ -47,17 +46,33 @@ class ReactWebTemplate extends React.Component<
 > {
   static defaultProps = reactWebTemplateDefaultProps;
 
+  private footerRef: React.RefObject<HTMLElement>;
+
   constructor(props: ReactWebTemplateProps) {
     super(props);
 
     const { innerHeight } = window;
 
+    this.footerRef = React.createRef<HTMLElement>();
     this.onResizeWindow = this.onResizeWindow.bind(this);
-    this.state = { windowHeight: innerHeight };
+    this.state = {
+      footerHeight: 0,
+      windowHeight: innerHeight
+    };
   }
 
   componentDidMount() {
     window.addEventListener('resize', debounce(this.onResizeWindow, 100));
+
+    const { current } = this.footerRef;
+
+    if (current && 'clientHeight' in current) {
+      const { clientHeight } = current;
+
+      this.setState({
+        footerHeight: clientHeight
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -86,10 +101,9 @@ class ReactWebTemplate extends React.Component<
       mainClassName,
       rightNav,
       rightNavClassName,
-      scrollWrapperClassName,
       wrapperClassName
     } = this.props;
-    const { windowHeight } = this.state;
+    const { footerHeight, windowHeight } = this.state;
 
     return (
       <Div
@@ -102,19 +116,21 @@ class ReactWebTemplate extends React.Component<
         {rightNav && (
           <nav className={`nav-right ${rightNavClassName}`}>{rightNav}</nav>
         )}
-        <div className={`scroll-wrapper ${scrollWrapperClassName}`}>
+        <div className={`content ${contentClassName}`}>
           <div
-            className={`content ${contentClassName}`}
-            style={{ minHeight: `${windowHeight}px` }}
+            className={`wrapper ${wrapperClassName}`}
+            style={{ minHeight: `${windowHeight - footerHeight}px` }}
           >
-            <div className={`wrapper ${wrapperClassName}`}>
-              {header && <header className={headerClassName}>{header}</header>}
-              <main className={mainClassName} role="main">
-                {children}
-              </main>
-            </div>
-            {footer && <footer className={footerClassName}>{footer}</footer>}
+            {header && <header className={headerClassName}>{header}</header>}
+            <main className={mainClassName} role="main">
+              {children}
+            </main>
           </div>
+          {footer && (
+            <footer className={footerClassName} ref={this.footerRef}>
+              {footer}
+            </footer>
+          )}
         </div>
       </Div>
     );
