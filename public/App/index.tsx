@@ -47,6 +47,10 @@ class App extends React.Component<any, any> {
             <button onClick={this.onClickRightButton}>Open rightNav</button>
           </div>
           <p>main</p>
+          <p>main</p>
+          <p>main</p>
+          <p>main</p>
+          <p>main</p>
         </div>
       </ReactWebTemplate>
     );

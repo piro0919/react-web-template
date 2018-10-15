@@ -37,7 +37,7 @@ following class name.
 
 | Safari | Chrome | FireFox |
 | :---: | :---: | :---: |
-| ? | ? | ? |
+| OK | OK | OK |
 
 ### Android
 
