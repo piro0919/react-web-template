@@ -19,8 +19,11 @@ const StyledReactWebTemplate = styled(ReactWebTemplate)`
   }
 
   .header {
+    align-items: center;
     border-bottom: 1px solid #e4e4e4;
-    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    transition: 250ms;
   }
 
   .footer,

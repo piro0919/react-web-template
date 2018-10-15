@@ -1,3 +1,4 @@
+import debounce = require('lodash.debounce');
 import * as React from 'react';
 import ReactWebTemplate from './styles';
 
@@ -5,12 +6,33 @@ class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
+    this.onClickHeaderButton = this.onClickHeaderButton.bind(this);
     this.onClickLeftButton = this.onClickLeftButton.bind(this);
     this.onClickRightButton = this.onClickRightButton.bind(this);
+    this.onResizeWindow = this.onResizeWindow.bind(this);
     this.state = {
+      headerHeight: 100,
+      isFitHeader: false,
       isOpenLeftNav: false,
       isOpenRightNav: false
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', debounce(this.onResizeWindow, 100));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResizeWindow);
+  }
+
+  onClickHeaderButton() {
+    const { isFitHeader } = this.state;
+
+    this.setState({
+      headerHeight: !isFitHeader ? innerHeight : 100,
+      isFitHeader: !isFitHeader
+    });
   }
 
   onClickLeftButton() {
@@ -28,8 +50,22 @@ class App extends React.Component<any, any> {
     this.setState({ isOpenLeftNav: false, isOpenRightNav: !isOpenRightNav });
   }
 
+  onResizeWindow() {
+    const { isFitHeader } = this.state;
+    const { innerHeight } = window;
+
+    this.setState({
+      headerHeight: isFitHeader ? innerHeight : 100
+    });
+  }
+
   render() {
-    const { isOpenLeftNav, isOpenRightNav } = this.state;
+    const {
+      headerHeight,
+      isFitHeader,
+      isOpenLeftNav,
+      isOpenRightNav
+    } = this.state;
 
     return (
       <ReactWebTemplate
@@ -37,7 +73,17 @@ class App extends React.Component<any, any> {
           isOpenRightNav ? 'open-right-nav' : ''
         }`}
         footer={<div className="footer">footer</div>}
-        header={<div className="header">header</div>}
+        header={
+          <div
+            className="header"
+            style={{
+              height: `${headerHeight}px`
+            }}
+          >
+            <span>header</span>
+            <button onClick={this.onClickHeaderButton}>fit header</button>
+          </div>
+        }
         leftNav={<div className="left-nav">leftNav</div>}
         rightNav={<div className="right-nav">rightNav</div>}
       >
