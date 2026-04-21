@@ -1,52 +1,48 @@
 # react-web-template
 
-This package makes it easy to create web site by react.
+> React site layout template with configurable header/footer/navigation slots.
 
-You only have to specify the following components as needed.
+[🔗 npm](https://www.npmjs.com/package/react-web-template)
 
-- children (main component)
-- footer
-- header
-- leftNav
-- rightNav
+## 📦 Install
 
-Also, if you need more fine adjustment, you can also add the
-following class name.
+```bash
+npm install react-web-template
+```
 
-- className (add to ReactWebTemplate component)
-- contentClassName (add to wrapper DOM of wrapper and footer DOM)
-- footerClassName
-- headerClassName
-- leftNavClassName
-- rightNavClassName
-- wrapperClassName (add to wrapper DOM of header and main DOM)
+## 🚀 Usage
 
-## example
+```tsx
+import ReactWebTemplate from "react-web-template";
 
-[GitHub Pages](https://piro0919.github.io/react-web-template/)
+function App() {
+  return (
+    <ReactWebTemplate
+      header={<MyHeader />}
+      footer={<MyFooter />}
+      leftNav={<MyLeftNav />}
+      rightNav={<MyRightNav />}
+    >
+      <MainContent />
+    </ReactWebTemplate>
+  );
+}
+```
 
-## browser
+## ⚙️ Props
 
-### Windows
+| Prop               | Type        | Description               |
+| ------------------ | ----------- | ------------------------- |
+| children           | ReactNode   | Main content              |
+| header / footer    | ReactNode   | Header / footer sections  |
+| leftNav / rightNav | ReactNode   | Left / right sidebars     |
+| className          | string      | Applied to the root       |
+| *ClassName         | string      | Per-slot class names      |
 
-| IE11 | Edge | Chrome | FireFox |
-| :---: | :---: | :---: | :---: |
-| OK | ? | OK | OK |
+## 📌 Status
 
-### Mac
+This package targets React class components and is no longer under active development.
 
-| Safari | Chrome | FireFox |
-| :---: | :---: | :---: |
-| OK | OK | OK |
+## 📄 License
 
-### Android
-
-| Chrome |
-| :---: |
-| OK |
-
-### iOS
-
-| Chrome | Safari |
-| :---: | :---: |
-| OK | OK |
+MIT
