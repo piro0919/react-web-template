@@ -1,48 +1,52 @@
 # react-web-template
 
-> React site layout template with configurable header/footer/navigation slots.
+> Tiny, headless layout primitive for React with header/footer/sidebar slots.
 
-[🔗 npm](https://www.npmjs.com/package/react-web-template)
+[![npm](https://img.shields.io/npm/v/react-web-template.svg)](https://www.npmjs.com/package/react-web-template)
+[![license](https://img.shields.io/npm/l/react-web-template.svg)](./LICENSE)
 
-## 📦 Install
+A small CSS Grid–based "holy-grail" layout component. Optional header, footer, left/right sidebars. Default inline styles get you working immediately; `unstyled` flips them off when you want full CSS control.
+
+🌐 **Demo:** <https://react-web-template.kkweb.io>
+
+## Install
 
 ```bash
 npm install react-web-template
 ```
 
-## 🚀 Usage
+Requires React 18 or 19.
+
+## Usage
 
 ```tsx
-import ReactWebTemplate from "react-web-template";
+import { WebTemplate } from "react-web-template";
 
-function App() {
+export function App() {
   return (
-    <ReactWebTemplate
-      header={<MyHeader />}
-      footer={<MyFooter />}
-      leftNav={<MyLeftNav />}
-      rightNav={<MyRightNav />}
-    >
-      <MainContent />
-    </ReactWebTemplate>
+    <WebTemplate header={<Header />} footer={<Footer />} leftNav={<Sidebar />}>
+      <Article />
+    </WebTemplate>
   );
 }
 ```
 
-## ⚙️ Props
+## API
 
-| Prop               | Type        | Description               |
-| ------------------ | ----------- | ------------------------- |
-| children           | ReactNode   | Main content              |
-| header / footer    | ReactNode   | Header / footer sections  |
-| leftNav / rightNav | ReactNode   | Left / right sidebars     |
-| className          | string      | Applied to the root       |
-| *ClassName         | string      | Per-slot class names      |
+| Prop         | Type        | Default | Description                          |
+| ------------ | ----------- | ------- | ------------------------------------ |
+| `children`   | `ReactNode` | —       | Main content (rendered in `<main>`). |
+| `header`     | `ReactNode` | —       | Header slot.                         |
+| `footer`     | `ReactNode` | —       | Footer slot.                         |
+| `leftNav`    | `ReactNode` | —       | Left sidebar slot.                   |
+| `rightNav`   | `ReactNode` | —       | Right sidebar slot.                  |
+| `className`  | `string`    | —       | Class on the root.                   |
+| `*ClassName` | `string`    | —       | Class on the respective slot.        |
+| `style`      | `CSSProps`  | —       | Inline style merged into root.       |
+| `unstyled`   | `boolean`   | `false` | Disable default Grid styles.         |
 
-## 📌 Status
+Root element exposes `data-has-header` / `data-has-footer` / `data-has-left-nav` / `data-has-right-nav` based on slot presence.
 
-This package targets React class components and is no longer under active development.
-
-## 📄 License
+## License
 
 MIT
