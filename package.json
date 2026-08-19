@@ -1,6 +1,6 @@
 {
   "name": "react-web-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tiny, headless layout primitive for React with header/footer/left/right sidebar slots built on CSS Grid.",
   "keywords": [
     "react",
